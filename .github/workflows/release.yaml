@@ -7,10 +7,8 @@ on:
       - 'SNAPSHOT'
 
 jobs:
-  build:
-
+  build_and_release:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -28,6 +26,13 @@ jobs:
         files: application/build/libs/app.jar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  update_docs:
+    needs: build_and_release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
     - name: Checkout documentation repository
       uses: actions/checkout@v4
       with:
@@ -37,7 +42,7 @@ jobs:
     - name: Update version in _config.yaml
       run: |
         sed -i "s/latest_release: .*/latest_release: ${GITHUB_REF#refs/tags/}/" documentation/_config.yaml
-    - name: Commit and push
+    - name: Commit and push    
       run: |
         git config --global user.name 'burdeamit'
         git config --global user.email 'burdeamit@gmail.com'
