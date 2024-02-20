@@ -1,6 +1,6 @@
 # Automated Release and Documentation Version Upgrade
 
-This repository demonstrates a proof of concept for automating the release of a Java application and the update of its documentation version using GitHub Actions.
+This repository demonstrates a proof of concept for automating the release of a Java application and the update of its documentation version across different repository using GitHub Actions.
 
 ## Release Workflow
 
