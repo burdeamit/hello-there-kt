@@ -44,8 +44,8 @@ jobs:
         sed -i "s/latest_release: .*/latest_release: ${GITHUB_REF#refs/tags/}/" documentation/_config.yaml
     - name: Commit and push    
       run: |
-        git config --global user.name 'burdeamit'
-        git config --global user.email 'burdeamit@gmail.com'
+        git config --global user.name '${{ secrets.USER_NAME }}'
+        git config --global user.email '${{ secrets.USER_EMAIL }}'
         git add .
         git commit -m "Update version to ${GITHUB_REF#refs/tags/}"
         git push
